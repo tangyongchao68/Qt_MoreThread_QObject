@@ -98,7 +98,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="GeneratedFiles\Debug\moc_mythread.cpp" />
-    <ClCompile Include="GeneratedFiles\Debug\moc_widget.cpp" />
+    <ClCompile Include="GeneratedFiles\Debug\moc_widget.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mythread.cpp" />
     <ClCompile Include="widget.cpp" />
