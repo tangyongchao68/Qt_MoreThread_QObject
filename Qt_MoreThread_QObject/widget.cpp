@@ -31,9 +31,12 @@ void Widget::openThreadSlot()
 	firstThread = new QThread;                                                      //线程容器
 	myObjectThread = new MyThread;
 	myObjectThread->moveToThread(firstThread);                                      //将创建的对象移到线程容器中
+
+	//注意connect的接收者区别
+	connect(firstThread, SIGNAL(started()), myObjectThread, SLOT(startThreadSlot()));  //开启线程槽函数	
 	connect(firstThread, SIGNAL(finished()), firstThread, SLOT(deleteLater()));        //终止线程时要调用deleteLater槽函数
-	connect(firstThread, SIGNAL(started()), myObjectThread, SLOT(startThreadSlot()));  //开启线程槽函数
 	connect(firstThread, SIGNAL(finished()), this, SLOT(finishedThreadSlot()));
+
 	firstThread->start();                                                           //开启多线程槽函数
 	qDebug() << "mainWidget QThread::currentThreadId()==" << QThread::currentThreadId();
 }
